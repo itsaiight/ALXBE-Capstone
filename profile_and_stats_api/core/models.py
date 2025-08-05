@@ -16,7 +16,7 @@ class Driver(models.Model):
     nationality = models.CharField(max_length=100)
     debut_year = models.IntegerField()
     current_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    stats = models.CharField()#might change this to a JSONField or similar for complex stats 
+    stats = models.CharField(max_length=500)#might change this to a JSONField or similar for complex stats 
     image_url = models.URLField(max_length=500, blank=True, null=True)
     
     def __str__(self):
