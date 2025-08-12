@@ -12,8 +12,7 @@ router.register(r'results', ResultViewSet, basename='results')
 
 urlpatterns = [
     path('teams/', TeamList.as_view(), name='team-list'),
-    path('drivers/', DriverList.as_view(), name='driver-list'),
-    path('drivers/<int:pk>/', DriverViewSet.get_queryset, name='driver-detail'), #might have to create a driverdetailview
+    path('drivers/', DriverList.as_view(), name='driver-list'), 
     path('races/', RaceList.as_view(), name='race-list'),
     path('results/', ResultList.as_view(), name='result-list'),
     path('', include(router.urls))
