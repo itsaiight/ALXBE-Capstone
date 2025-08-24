@@ -26,7 +26,7 @@ class DriverStatsView(GenericAPIView):
            "points": points,
        })
 
-class DriverComparisons(GenericAPIView):
+class DriverComparisonsView(GenericAPIView):
         def get(self, request):
         # Get query parameters
             driver_a_id = request.query_params.get("a")

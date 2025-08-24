@@ -50,3 +50,8 @@ The project uses MySQL as the database backend and supports token-based authenti
 - /api/races/	    GET/POST	List or create races
 - /api/results/	    GET/POST	List or create results
 - /api-auth-token/	POST	    Obtain auth token
+
+### ✅ Aug 24, 2025  
+- Updated `analytics/views.py`:
+  - Created `DriverStatsView` and `DriverComparisonsView` 
+- Updated `README.md`
