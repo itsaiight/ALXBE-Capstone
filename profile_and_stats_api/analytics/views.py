@@ -12,7 +12,7 @@ GET /api/analytics/fastest-driver/
 """
 class DriverStatsView(GenericAPIView):
        def get(self, request, driver_id):
-        driver = get_object_or_404(Driver, pk=Driver.driver_id)
+        driver = get_object_or_404(Driver, pk=driver_id)
 
         qs = Result.objects.filter(driver=driver)
         total_starts = qs.count()
@@ -70,8 +70,8 @@ class DriverComparisonsView(GenericAPIView):
                     b_wins += 1
 
             return Response({
-                driver_a.last_name.lower(): stats_a,
-                driver_b.last_name.lower(): stats_b,
+                driver_a.full_name: stats_a,
+                driver_b.full_name: stats_b,
                 "head_to_head": {
                     "races": len(shared_races),
                     "a_wins": a_wins,
