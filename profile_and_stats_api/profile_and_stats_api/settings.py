@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'profile_and_stats_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'f1_driver_and_stats',
-        'USER': 'root',
-        'PASSWORD': 'uDNR9Q8z5FStjEJn',
-        'HOST': 'localhost',
+        'NAME': 'itsaiight$default',
+        'USER': 'itsaiight$default',
+        'PASSWORD': 'qwerty',
+        'HOST': 'itsaiight.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
