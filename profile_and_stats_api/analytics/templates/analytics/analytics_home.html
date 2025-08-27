@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1 Analytics API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      .header {
+        background-color: #e10600; /* F1 red */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      .nav-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .nav-item {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .nav-item a {
+        text-decoration: none;
+        color: #e10600;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .nav-item a:hover {
+        color: #ff3b30;
+      }
+      .user-info {
+        text-align: right;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+      }
+      .login-links {
+        margin-top: 30px;
+        text-align: center;
+      }
+      .form-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+      }
+      .form-container input,
+      .form-container select {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .form-container button {
+        background-color: #e10600;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .form-container button:hover {
+        background-color: #ff3b30;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>F1 Analytics API</h1>
+      <p>Advanced statistics and driver comparisons</p>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="/analytics/drivers/1/stats/">Driver Statistics</a>
+        <p>View detailed stats for any F1 driver</p>
+      </li>
+      <li class="nav-item">
+        <a href="/analytics/comparison/?a=1&b=2">Driver Comparisons</a>
+        <p>Compare performance between two drivers</p>
+      </li>
+      <li class="nav-item">
+        <a href="/">Back to Home</a>
+        <p>Return to the main page</p>
+      </li>
+    </ul>
+
+    <div class="form-container">
+      <h3>Quick Access</h3>
+      <form id="driverStatsForm">
+        <label for="driverId">View Driver Stats:</label>
+        <input
+          type="text"
+          id="full_name"
+          name="driverId"
+          placeholder="Driver Full Name"
+          min="1"
+          required
+        />
+        <button type="button" onclick="goToDriverStats()">Go</button>
+      </form>
+
+      <form id="comparisonForm" style="margin-top: 15px">
+        <label for="driverA">Compare Drivers:</label>
+        <input
+          type="text"
+          id="driverA"
+          name="driverA"
+          placeholder="Driver A Full Name"
+          required
+        />
+        
+        <input
+          type="text"
+          id="driverB"
+          name="driverB"
+          placeholder="Driver B Full Name"
+          required
+        />
+        
+        <button type="button" onclick="goToComparison()">Compare</button>
+      </form>
+    </div>
+
+    <script>
+      function goToDriverStats() {
+        const full_name = document.getElementById("full_name").value;
+        if (full_name) {
+          window.location.href = `/analytics/drivers/${full_name}/stats/`;
+        }
+      }
+
+      function goToComparison() {
+        const driverA = document.getElementById("driverA").value;
+        const driverB = document.getElementById("driverB").value;
+        if (driverA && driverB) {
+          window.location.href = `/analytics/comparison/?a=${driverA}&b=${driverB}`;
+        }
+      }
+    </script>
+  </body>
+</html>

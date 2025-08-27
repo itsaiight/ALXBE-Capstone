@@ -10,5 +10,7 @@ router.register(r'races', RaceViewSet, basename='races')
 router.register(r'results', ResultViewSet, basename='results')
 
 urlpatterns = [
+
     path('', include(router.urls))
+    
 ]

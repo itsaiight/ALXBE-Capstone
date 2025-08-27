@@ -5,14 +5,20 @@ from core.models import Driver, Result
 from django.db.models import Sum
 # Create your views here.
 """GET /api/drivers/:id/stats/
-GET /api/drivers/:id/circuits/ might drop this
-GET /api/drivers/:id/seasons/ might drop this
+GET /api/drivers/:id/circuits/ drop this for now
+GET /api/drivers/:id/seasons/ drop this for now
 GET /api/comparison/?a=hamilton&b=alonso
-GET /api/analytics/fastest-driver/
+GET /api/analytics/fastest-driver/ drop this for now
 """
+
+def analytics_home(request):
+    return render(request, 'analytics/analytics_home.html')
+
 class DriverStatsView(GenericAPIView):
-       def get(self, request, driver_id):
-        driver = get_object_or_404(Driver, pk=driver_id)
+       authentication_classes = []  # Public endpoint
+       permission_classes = []      # Public endpoint
+       def get(self, request, full_name):
+        driver = get_object_or_404(Driver, full_name=full_name)
 
         qs = Result.objects.filter(driver=driver)
         total_starts = qs.count()
@@ -27,16 +33,18 @@ class DriverStatsView(GenericAPIView):
        })
 
 class DriverComparisonsView(GenericAPIView):
+        permission_classes = []  # Public endpoint
+        authentication_classes = []  # Public endpoint
         def get(self, request):
         # Get query parameters
-            driver_a_id = request.query_params.get("a")
-            driver_b_id = request.query_params.get("b")
+            driver_a_full_name = request.query_params.get("a")
+            driver_b_full_name = request.query_params.get("b")
 
-            if not driver_a_id or not driver_b_id:
+            if not driver_a_full_name or not driver_b_full_name:
                 return Response({"error": "Please provide 'a' and 'b' query params"}, status=400)
 
-            driver_a = get_object_or_404(Driver, pk=driver_a_id)
-            driver_b = get_object_or_404(Driver, pk=driver_b_id)
+            driver_a = get_object_or_404(Driver, full_name=driver_a_full_name)
+            driver_b = get_object_or_404(Driver, full_name=driver_b_full_name)
 
             # Query results for both drivers in the season
             results_a = Result.objects.filter(driver=driver_a)
