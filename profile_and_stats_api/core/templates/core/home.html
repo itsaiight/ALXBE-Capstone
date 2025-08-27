@@ -57,31 +57,6 @@
     </style>
   </head>
   <body>
-    <div class="user-info">
-      {% if user.is_authenticated %} Welcome,
-      <strong>{{ user.username }}</strong>!
-      <form action="{% url 'logout' %}" method="post" style="display: inline">
-        {% csrf_token %}
-        <button
-          type="submit"
-          style="
-            background: none;
-            border: none;
-            color: #e10600;
-            cursor: pointer;
-            text-decoration: underline;
-            font: inherit;
-          "
-        >
-          Logout
-        </button>
-      </form>
-      {% else %}
-      <a href="{% url 'login' %}">Login</a> |
-      <a href="/admin/">Admin Login</a>
-      {% endif %}
-    </div>
-
     <div class="header">
       <h1> Welcome to F1 Driver & Stats API </h1>
       <p>Your gateway to Formula 1 data and analytics</p>
@@ -101,14 +76,5 @@
         <p>View statistics and insights</p>
       </li>
     </ul>
-
-    {% if not user.is_authenticated %}
-    <div class="login-links">
-      <p>
-        You are not logged in. <a href="{% url 'login' %}">Login here</a> to
-        perform CRUD operations.
-      </p>
-    </div>
-    {% endif %}
   </body>
 </html>
