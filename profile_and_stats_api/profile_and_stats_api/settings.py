@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-i5l_azs&u8i)_m1h0$)r@p9s$eqz=un$&&(6=ry@d537c2$lc3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["itsaiight.pythonanywhere.com"]
 
 
 # Application definition
@@ -54,6 +56,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar']
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+
 ROOT_URLCONF = 'profile_and_stats_api.urls'
 
 TEMPLATES = [
@@ -81,10 +87,10 @@ WSGI_APPLICATION = 'profile_and_stats_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'itsaiight$default',
-        'USER': 'itsaiight$default',
-        'PASSWORD': 'qwerty',
-        'HOST': 'itsaiight.mysql.pythonanywhere-services.com',
+        'NAME': os.environ.get('DB_NAME','itsaiight$default'),
+        'USER': os.environ.get('DB_USER','itsaiight'),
+        'PASSWORD': os.environ.get('DB_PASSWORD','qwertyuiop098'),
+        'HOST': os.environ.get('DB_HOST','itsaiight.mysql.pythonanywhere-services.com'),
         'PORT': '3306',
     }
 }
@@ -125,6 +131,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -144,3 +159,8 @@ REST_FRAMEWORK = {
 
 LOGIN_REDIRECT_URL = '/core/'
 LOGOUT_REDIRECT_URL = ''
+
+#Security settings for production
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
