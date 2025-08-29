@@ -46,7 +46,7 @@ The core API manages the fundamental F1 data entities. All endpoints support `GE
       "number": 44,
       "nationality": "British",
       "debut_year": 2007,
-      "current_team": { ...team object... },
+      "current_team": { ...team_id... },
       "stats": JSONFIELD,
       "image_url": "http://en.wikipedia.org/wiki/Lewis_Hamilton" #opted for wikipedia urls
     }
@@ -102,8 +102,8 @@ The core API manages the fundamental F1 data entities. All endpoints support `GE
   [
     {
       "result_id": 1,
-      "driver": { ...driver object... },
-      "race": { ...race object... },
+      "driver": { ...driver_id... },
+      "race": { ...race_id... },
       "position": 1,
       "points": 25.0
     }
