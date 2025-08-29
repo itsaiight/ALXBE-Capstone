@@ -85,7 +85,7 @@ The core API manages the fundamental F1 data entities. All endpoints support `GE
       "name": "British Grand Prix",
       "round_number": 10,
       "year": 2025,
-      "circuit": { ...circuit object... },
+      "circuit": { ...circuit_id... },
       "date": "2025-07-06"
     }
   ]
